@@ -6,4 +6,10 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
+// GET /Login
+router.get('/login', (req,res,next) =>{
+  //pass to view
+  res.render('login', {title: 'Login'});
+});
+
 module.exports = router;
