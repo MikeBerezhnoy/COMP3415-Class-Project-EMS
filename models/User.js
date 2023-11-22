@@ -1,21 +1,34 @@
 var mongoose = require('mongoose');
 
+const baseOptions = {
+    discriminatorKey: "type",
+    collection: "users",
+};
 
-var UserSchema = new mongoose.Schema({
-    firstName: {type: String, required: [true, "First name is required"]},
-    lastName: {type: String, required: [true, "Last name is required"]},
-    username: {type: String, required},
-    password: {type: String, required},
-    role: {type: String, required},
-    address: {type: String},
-    hireDate: {type: Date}
-    //,baseOptions
-})
+var UserSchema = new mongoose.Schema(
+    {
+        firstName: { type: String, required: [true, "First name is required"] },
+        lastName: { type: String, required: [true, "Last name is required"] },
+        username: { type: String, required: [true]},
+        password: { type: String, required: [true] },
+        role: { type: String, required: [true] },
+        address: { type: String },
+        birthDate: { type: Date },
+        hireDate: { type: Date },
+    },
+    baseOptions
+);
 
-// https://techinsights.manisuec.com/mongodb/mongoose-discriminator-non-dry-way-inherit-properties/#:~:text=Mongoose%20Discriminator%20is%20another%20very,the%20same%20underlying%20MongoDB%20collection.
-// const BaseUser = mongoose.model('User', UserSchema)
-// const Employee = BaseUser.discriminator('Employee', new mongoose.Schema({ 
-// 	hourlyRate : { type: double },
-// 	shiftList  : { type: List } //should be array
-// 	})
-// );
+UserSchema.methods.setUserName = function () {
+    this.username = this.firstName + this.lastName;
+    return this.username;
+}
+
+const User = mongoose.model("User", UserSchema);
+
+const Employee = User.discriminator('Employee', new mongoose.Schema({
+    hourlyRate: { type: Number },
+    shiftList: { type: Array } 
+}));
+
+module.exports = User;

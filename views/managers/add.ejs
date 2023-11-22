@@ -1,0 +1,46 @@
+<%- include('header'); -%>
+
+    <form method="post">
+        <fieldset class="form-group">
+            <label for="firstName" class="col-2 control-label">
+                First Name: *
+            </label>
+            <input name="firstName" id="firstName" required />
+        </fieldset>
+        <fieldset class="form-group">
+            <label for="lastName" class="col-2 control-label">
+                Last Name: *
+            </label>
+            <input name="lastName" id="lastName" required />
+        </fieldset>
+        <fieldset class="form-group">
+            <label for="role" class="col-2 control-label">
+                Role: *
+            </label>
+            <input name="role" id="role" required />
+        </fieldset>
+        <fieldset class="form-group">
+            <label for="address" class="col-2 control-label">
+                Address: *
+            </label>
+            <input name="address" id="address" required />
+        </fieldset>
+        <fieldset class="form-group">
+            <label for="birthDate" class="col-2 control-label">
+                Birthdate: *
+            </label>
+            <input name="birthDate" id="birthDate" type="date" required />
+        </fieldset>
+        <fieldset class="form-group">
+            <label for="hireDate" class="col-2 control-label">
+                Hire Date: *
+            </label>
+            <input name="hireDate" id="hireDate" type="date" required />
+        </fieldset>
+        <fieldset class="form-group">
+            <button class="btn btn-info offset-3">
+                Create Employee
+            </button>
+            <hr />
+        </fieldset>
+    </form>
