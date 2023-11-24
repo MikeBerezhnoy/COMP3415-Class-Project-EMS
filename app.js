@@ -3,8 +3,11 @@
 
 // MAIN TO DO LIST:
 // 1   Finish employee/manager section (Edit, delete for employees)
-// 2   Finish shift section (Create, view, Edit, delete for shifts)
+// 2   Finish shift section (Create, view, Edit, delete for shifts) -- CRUD is complete
 // 2.5 Need to be able to pull dropdown list of employees for shift creation
+// 2.6 Date needs to only display the date not the time
+// 2.7 start and end time only need to display time
+// 2.8 edit date, start and end time fields don't populate when taken to edit screen
 // 3   Finish the login section and functionality
 // 4   Remove register section (employees will never self register - they will only be
 //     added by managers)
@@ -27,6 +30,7 @@ const mongoose = require('mongoose')
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var managersRouter = require('./routes/managers');
+var shiftRouter = require('./routes/shift');
 
 var app = express();
 
@@ -58,6 +62,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/managers', managersRouter);
+app.use('/shift',shiftRouter);
 
 app.post('/', function(req, res, next){
   // req.body object has your form values

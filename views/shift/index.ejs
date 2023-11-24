@@ -1,0 +1,32 @@
+<%- include('../header'); -%>
+<h1><%= title %></h1>
+<p>Welcome to <%= title %></p>
+
+
+<table>
+    <thead>
+        <th>Job Code</th>
+        <th>Date</th>
+        <th>Start Time</th>
+        <th>End Time</th>
+        <th></th>
+    </thead>
+    <tbody>
+        <% shifts.forEach(function(shift) { %>
+        <tr>
+            <td><%= shift.jobCode %></td>
+            <td><%= shift.date %></td>
+            <td>
+                <%= 
+                    shift.startTime
+                %>
+            </td>
+            <td><%= shift.endTime %></td>
+            <td>
+                <a href="/shift/edit/<%= shift._id %>" class="btn btn-primary">Edit</a>
+                <a href="/shift/delete/<%= shift._id %>" class="btn btn-danger">Delete</a>
+            </td>
+        </tr>
+        <% }); %>
+    </tbody>
+</table>

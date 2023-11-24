@@ -1,0 +1,56 @@
+<%- include('../header'); -%>
+
+<form method="post">
+    <fieldset class="form-group">
+        <label for="jobCode" class="col-2 control-label">
+            Job Code: *
+        </label>
+        <input name="jobCode" id="jobCode" maxlength="10" value= <%= shift.jobCode %> required />
+    </fieldset>
+    <!-- implement employee list to select from -->
+        <!-- 
+    <fieldset class="form-group">
+        <label for="assignedWorker" class="col-2 control-label">
+            Assign Employee: *
+        </label>
+        <input list="employees" name="assignedWorker" id="assignedWorker">
+            <datalist id="browsers">
+                
+                <% //users.forEach(function(user) { %>
+                    <option value="<%//= user.userName %>">
+                <% //}); %>
+                
+                <option value="Firefox">
+                <option value="Chrome">
+                <option value="Opera">
+                <option value="Safari">
+            </datalist>
+        <input type="submit">
+    </fieldset>
+    -->
+    <!-------------------------------------------->
+    <fieldset class="form-group">
+        <label for="date" class="col-2 control-label">
+            Date of Shift: *
+        </label>
+        <input name="date" id="date" type="date" value= <%= shift.date %> required />
+    </fieldset>
+    <fieldset class="form-group">
+        <label for="startTime" class="col-2 control-label">
+            Start Time: *
+        </label>
+        <input name="startTime" id="startTime" type="time" value= <%= shift.startTime %> required />
+    </fieldset>
+    <fieldset class="form-group">
+        <label for="endTime" class="col-2 control-label">
+            End Time: *
+        </label>
+        <input name="endTime" id="endTime" type="time" value= <%= shift.endTime %> required />
+    </fieldset>
+    <fieldset class="form-group">
+        <button class="btn btn-info offset-3">
+            Create Shift
+        </button>
+        <hr />
+    </fieldset>
+</form>

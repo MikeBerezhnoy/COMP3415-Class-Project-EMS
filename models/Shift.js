@@ -7,6 +7,7 @@ var ShiftSchema = new mongoose.Schema(
         startTime: { type: Date, required: true },  // (date included in start time)
         endTime: { type: Date, required: true },
         //assignedWorker: { type: Employee },
+        assignedWorker: { type: String }, //needs to be replaced with above when possible
         status: { type: String },
         punchInTime: { type: Date },
         punchOutTime: { type: Date }
@@ -15,3 +16,4 @@ var ShiftSchema = new mongoose.Schema(
 );
 
 const Shift = mongoose.model("Shift", ShiftSchema);
+module.exports = Shift
