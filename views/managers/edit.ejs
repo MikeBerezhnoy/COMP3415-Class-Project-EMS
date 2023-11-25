@@ -8,37 +8,43 @@
         <label for="firstName" class="col-2 control-label">
             First Name: *
         </label>
-        <input name="firstName" id="firstName" required />
+        <input name="firstName" id="firstName" value="<%= employee.firstName %>" required />
     </fieldset>
     <fieldset class="form-group">
         <label for="lastName" class="col-2 control-label">
             Last Name: *
         </label>
-        <input name="lastName" id="lastName" required />
+        <input name="lastName" id="lastName" value="<%= employee.lastName %>" required />
     </fieldset>
     <fieldset class="form-group">
         <label for="role" class="col-2 control-label">
             Role: *
         </label>
-        <input name="role" id="role" required />
+        <input name="role" id="role" value="<%= employee.role %>" required />
     </fieldset>
     <fieldset class="form-group">
         <label for="address" class="col-2 control-label">
             Address: *
         </label>
-        <input name="address" id="address" required />
+        <input name="address" id="address" value="<%= employee.address %>" required />
     </fieldset>
     <fieldset class="form-group">
         <label for="birthDate" class="col-2 control-label">
             Birthdate: *
         </label>
-        <input name="birthDate" id="birthDate" type="date" required />
+        <input name="birthDate" id="birthDate" type="date" value="<%= employee.birthDate %>" required />
     </fieldset>
     <fieldset class="form-group">
         <label for="hireDate" class="col-2 control-label">
             Hire Date: *
         </label>
-        <input name="hireDate" id="hireDate" type="date" required />
+        <input name="hireDate" id="hireDate" type="date" value="<%= employee.hireDate %>" required />
+    </fieldset>
+    <fieldset class="form-group">
+        <label for="hourlyRate" class="col-2 control-label">
+            Hourly Rate: *
+        </label>
+        <input name="hourlyRate" id="hourlyRate" type="number" value="<%= employee.hourlyRate %>" required />
     </fieldset>
     <fieldset class="form-group">
         <button class="btn btn-info offset-3">

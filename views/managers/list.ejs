@@ -3,7 +3,7 @@
 <p>Welcome to <%= title %></p>
 
 
-<table>
+<table class="table table-striped table-hover">
     <thead>
         <th>ID#</th>
         <th>First Name</th>
@@ -13,18 +13,25 @@
         <th>Address</th>
         <th>Birthdate</th>
         <th>Hire Date</th>
+        <th>Hourly Rate</th>
+        <th></th>
     </thead>
     <tbody>
-        <% users.forEach(function(user) { %>
+        <% employees.forEach(function(employee) { %>
         <tr>
-            <td><%= user.id %></td>
-            <td><%= user.firstName %></td>
-            <td><%= user.lastName %></td>
-            <td><%= user.userName %></td>
-            <td><%= user.role %></td>
-            <td><%= user.address %></td>
-            <td><%= user.birthDate %></td>
-            <td><%= user.hireDate %></td>
+            <td><%= employee.id %></td>
+            <td><%= employee.firstName %></td>
+            <td><%= employee.lastName %></td>
+            <td><%= employee.userName %></td>
+            <td><%= employee.role %></td>
+            <td><%= employee.address %></td>
+            <td><%= employee.birthDate %></td>
+            <td><%= employee.hireDate %></td>
+            <td><%= employee.hourlyRate %></td>
+            <td>
+                <a href="/managers/edit/<%= employee._id %>" class="btn btn-primary">Edit</a>
+                <a href="/managers/delete/<%= employee._id %>" class="btn btn-danger">Delete</a>
+            </td>
         </tr>
         <% }); %>
     </tbody>

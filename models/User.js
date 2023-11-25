@@ -26,9 +26,4 @@ UserSchema.methods.setUserName = function () {
 
 const User = mongoose.model("User", UserSchema);
 
-const Employee = User.discriminator('Employee', new mongoose.Schema({
-    hourlyRate: { type: Number },
-    shiftList: { type: Array } 
-}));
-
 module.exports = User;

@@ -1,14 +1,14 @@
 <%- include('../header'); -%>
-<h1><%= title %></h1>
 <p>Welcome to <%= title %></p>
 
 
-<table>
+<table class="table table-striped table-hover">
     <thead>
         <th>Job Code</th>
         <th>Date</th>
         <th>Start Time</th>
         <th>End Time</th>
+        <th>Assigned Worker</th>
         <th></th>
     </thead>
     <tbody>
@@ -22,6 +22,7 @@
                 %>
             </td>
             <td><%= shift.endTime %></td>
+            <td><%= shift.assignedWorker.userName %></td>
             <td>
                 <a href="/shift/edit/<%= shift._id %>" class="btn btn-primary">Edit</a>
                 <a href="/shift/delete/<%= shift._id %>" class="btn btn-danger">Delete</a>

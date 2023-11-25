@@ -6,12 +6,12 @@ const Shift = require('../models/Shift');
 
 router.get('/', (req, res, next) => {
     Shift.find({}).then((shifts) => {
-        res.render('shift/index', { title: 'List of shifts', shifts: shifts });
+        res.render('managers/shift/index', { title: 'List of shifts', shifts: shifts });
     });
 });
 
 router.get('/add', (req, res, next) => {
-    res.render('shift/add', { title: 'Create Shift' });
+    res.render('managers/shift/add', { title: 'Create Shift' });
 });
 
 router.post('/add', (req, res, next) => {
@@ -26,7 +26,7 @@ res.redirect('/shift');
 
 router.get('/edit/:id', (req, res, next) => {
     Shift.findOne({ _id: req.params.id }).then((shift) => {
-        res.render('shift/edit', { title: 'Edit shift', shift: shift });
+        res.render('managers/shift/edit', { title: 'Edit shift', shift: shift });
     }); 
 });
 

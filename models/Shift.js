@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+const Employee = require('../models/User');
 
 var ShiftSchema = new mongoose.Schema(
     {
