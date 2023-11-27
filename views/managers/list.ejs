@@ -25,8 +25,8 @@
             <td><%= employee.username %></td>
             <td><%= employee.role %></td>
             <td><%= employee.address %></td>
-            <td><%= employee.birthDate %></td>
-            <td><%= employee.hireDate %></td>
+            <td><%= new Intl.DateTimeFormat('en-GB', { year: 'numeric', month: 'long', day: '2-digit'}).format(employee.birthDate) %></td>
+            <td><%= new Intl.DateTimeFormat('en-GB', { year: 'numeric', month: 'long', day: '2-digit'}).format(employee.hireDate) %></td>
             <td><%= employee.hourlyRate %></td>
             <td>
                 <a href="/managers/edit/<%= employee._id %>" class="btn btn-primary">Edit</a>
