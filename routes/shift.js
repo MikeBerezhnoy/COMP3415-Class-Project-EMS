@@ -3,6 +3,7 @@ var router = express.Router();
 
 //import user model
 const Shift = require('../models/Shift');
+const Employee = require('../models/Employee');
 
 router.get('/', (req, res, next) => {
     Shift.find({}).then((shifts) => {
@@ -11,7 +12,8 @@ router.get('/', (req, res, next) => {
 });
 
 router.get('/add', (req, res, next) => {
-    res.render('managers/shift/add', { title: 'Create Shift' });
+    Employee.find({}).then((employees) => {
+        res.render('managers/shift/add', { title: 'Create Shift', employees: employees });});
 });
 
 router.post('/add', (req, res, next) => {
@@ -19,6 +21,7 @@ router.post('/add', (req, res, next) => {
         jobCode: req.body.jobCode,
         date: req.body.date,
         startTime: req.body.date+"T"+req.body.startTime,
+        assignedWorker: req.body.assignedWorker,
         endTime: req.body.date+"T"+req.body.endTime
     })
 res.redirect('/shift');

@@ -22,7 +22,13 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
+//configs file
+const configs = require("./config/global");
+//below are are for user authentication and sessions
+const passport = require("passport");
+const session = require("express-session");
+//import user model to configure local strategy
+const User = require("./models/User");
 // require mongoose
 const mongoose = require('mongoose')
 
@@ -34,19 +40,30 @@ var shiftRouter = require('./routes/shift');
 
 var app = express();
 
-//setup DB connection
-mongoose.connect('mongodb+srv://hrosebor:cAk0yqChpTD5ZOp1@cluster0.njk7204.mongodb.net/EMS',
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-  }
-);
+mongoose
+  .connect(configs.db, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then((message) => {
+    //mongoose connected
+    console.log("Connected successfully");
+  })
+  .catch((error) => {
+    //error
+    console.log("Error while connecting: " + error);
+  });
 
-//connect to DB, console log status
-const db = mongoose.connection;
-db.on("error", console.error.bind(console, "connection error: "));
-db.once("open", function () {
-  console.log("Connected successfully");});
+// //setup DB connection
+// mongoose.connect('mongodb+srv://hrosebor:cAk0yqChpTD5ZOp1@cluster0.njk7204.mongodb.net/EMS',
+//   {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true
+//   }
+// );
+
+// //connect to DB, console log status
+// const db = mongoose.connection;
+// db.on("error", console.error.bind(console, "connection error: "));
+// db.once("open", function () {
+//   console.log("Connected successfully");});
 
 
 // view engine setup
@@ -59,10 +76,26 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+//configure session
+app.use(
+  session({
+    secret: configs.sessionSecret,
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+
+//configure passport
+app.use(passport.initialize());
+app.use(passport.session()); 
+
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/managers', managersRouter);
 app.use('/shift',shiftRouter);
+
 
 app.post('/', function(req, res, next){
   // req.body object has your form values

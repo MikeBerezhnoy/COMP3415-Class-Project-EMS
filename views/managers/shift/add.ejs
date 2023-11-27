@@ -7,6 +7,18 @@
         </label>
         <input name="jobCode" id="jobCode" maxlength="10" required />
     </fieldset>
+    <fieldset class="form-group">
+        <label for="assignedWorker" class="col-2 control-label">
+            Assigned Worker: *
+        </label>
+        <select class="form-control-sm" name="assignedWorker" id="assignedWorker">
+            <% employees.forEach(function(employee) { %>
+                <option value="<%= employee.username %>">
+                    <%= employee.username %>
+                </option>
+            <% }); %>
+        </select>
+    </fieldset>
     <!-- implement employee list to select from -->
         <!-- 
     <fieldset class="form-group">

@@ -14,17 +14,18 @@ router.get('/add', (req, res, next) => {
 });
 
 router.post('/add', (req, res, next) => {
+    const userName = req.body.firstName 
     Employee.create({
         firstName: req.body.firstName,
         lastName: req.body.lastName,
-        userName: req.body.firstName + "" + req.body.lastName,
+        username: req.body.firstName + "" + req.body.lastName,
         password: req.body.birthDate,
         role: req.body.role,
         address: req.body.address,
         hireDate: req.body.hireDate,
         hourlyRate: req.body.hourlyRate
     })
-res.redirect('/managers');
+res.redirect('/managers/LIST');
 });
 
 router.get('/list', (req, res, next) => {
@@ -43,7 +44,7 @@ router.post('/edit/:id', (req, res, next) => {
     Employee.updateOne({ _id: req.params.id }, {
         firstName: req.body.firstName,
         lastName: req.body.lastName,
-        userName: req.body.firstName + "" + req.body.lastName,
+        username: req.body.firstName + "" + req.body.lastName,
         password: req.body.birthDate,
         birthDate: req.body.birthDate,
         role: req.body.role,
