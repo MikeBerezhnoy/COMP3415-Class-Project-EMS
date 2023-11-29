@@ -2,13 +2,13 @@
 //localhost:3000
 
 // MAIN TO DO LIST:
-// 1   Finish employee/manager section (Edit, delete for employees)
-// 2   Finish shift section (Create, view, Edit, delete for shifts) -- CRUD is complete
-// 2.5 Need to be able to pull dropdown list of employees for shift creation -- Done
-// 2.6 Date needs to only display the date not the time -- Done
-// 2.7 start and end time only need to display time -- Done
+// 1   Finish employee/manager section (Edit, delete for employees) -- Employee Done need manager CRUD
+// X2   Finish shift section (Create, view, Edit, delete for shifts) -- CRUD is complete
+// X2.5 Need to be able to pull dropdown list of employees for shift creation -- Done
+// X2.6 Date needs to only display the date not the time -- Done
+// X2.7 start and end time only need to display time -- Done
 // 2.8 edit date, start and end time fields don't populate when taken to edit screen
-// 3   Finish the login section and functionality
+// X3   Finish the login section and functionality -- Login completed
 // 4   Remove register section (employees will never self register - they will only be
 //     added by managers)
 // 5   employee punch clock system
@@ -39,6 +39,7 @@ var shiftRouter = require('./routes/shift');
 
 var app = express();
 
+//connecting to the mongoose database
 mongoose
   .connect(configs.db, { useNewUrlParser: true, useUnifiedTopology: true })
   .then((message) => {
@@ -90,12 +91,12 @@ app.use(passport.initialize());
 app.use(passport.session()); 
 passport.use(User.createStrategy());
 
-// //configure user object serialization/deserialization
+// //configure user object serialization/deserialization for logging in and out
 passport.serializeUser(User.serializeUser()); // serializeUser method comes from plm package
 passport.deserializeUser(User.deserializeUser());
 
 
-
+//getting the routes to use
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/managers', managersRouter);
