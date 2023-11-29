@@ -1,4 +1,13 @@
 <%- include('header'); -%>
+<% if (messages) { %>
+    <div class="alert alert-danger">
+        Invalid credentials
+    </div>
+<%} else { %>}
+    <div class="alert alert-info">
+        Please enter your credentials
+    </div>
+<% } %>
 <form method="post">
     <fieldset class="form-group">
       <label for="username" class="col-2 control-label">

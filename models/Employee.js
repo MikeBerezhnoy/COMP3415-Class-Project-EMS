@@ -7,4 +7,5 @@ const Employee = User.discriminator('Employee', new mongoose.Schema({
     shiftList: { type: Array } 
 }));
 
+
 module.exports = Employee;

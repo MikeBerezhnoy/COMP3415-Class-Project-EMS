@@ -22,7 +22,6 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var moment = require('moment');
 //configs file
 const configs = require("./config/global");
 //below are are for user authentication and sessions
@@ -77,7 +76,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-
 //configure session
 app.use(
   session({
@@ -90,6 +88,12 @@ app.use(
 //configure passport
 app.use(passport.initialize());
 app.use(passport.session()); 
+passport.use(User.createStrategy());
+
+// //configure user object serialization/deserialization
+passport.serializeUser(User.serializeUser()); // serializeUser method comes from plm package
+passport.deserializeUser(User.deserializeUser());
+
 
 
 app.use('/', indexRouter);
@@ -120,8 +124,8 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-app.listen(3000, function () {
-  console.log('App found @ http://localhost:3000');
-});
+// app.listen(3000, function () {
+//   console.log('App found @ http://localhost:3000');
+// });
 
 module.exports = app;

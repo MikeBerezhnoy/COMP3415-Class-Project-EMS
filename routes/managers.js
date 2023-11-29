@@ -2,8 +2,9 @@ var express = require('express');
 var router = express.Router();
 
 //import user model
+const User = require('../models/User')
 const Employee = require('../models/Employee');
-const Shift = require('../models/Shift');
+
 
 router.get('/', (req, res, next) => {
     res.render('managers/index', { title: 'Managers page' });
@@ -15,18 +16,29 @@ router.get('/add', (req, res, next) => {
 
 router.post('/add', (req, res, next) => {
     const userName = req.body.firstName 
-    Employee.create({
+    User.register( 
+        new Employee({
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         username: req.body.firstName + "" + req.body.lastName,
-        password: req.body.birthDate,
+        birthDate: req.body.birthDate,
         role: req.body.role,
         address: req.body.address,
         hireDate: req.body.hireDate,
         hourlyRate: req.body.hourlyRate
+        }),
+        req.body.password,
+        (err) => {
+            if(err){
+                console.log(err)
+                res.redirect('/managers/add')
+            }
+            else{
+                res.redirect('/managers/list')
+            }
+        }
+    )   
     })
-res.redirect('/managers/LIST');
-});
 
 router.get('/list', (req, res, next) => {
     Employee.find({}).then((employees) => {
