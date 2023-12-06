@@ -1,1 +1,27 @@
  <!-- Where the shifts for employee is displayed -->
+ <%- include('../header'); -%>
+<h1><%= title %></h1>
+<p>Welcome to <%= title %></p>
+
+<table class="table table-striped table-hover">
+    <thead>
+      <th>Job Code</th>
+      <th>Date</th>
+      <th>Start Time</th>
+      <th>End Time</th>
+      <th>Assigned Worker</th>
+    </thead>
+    <tbody>
+      <% shifts.forEach(function(shift) { %>
+        <% if (user.username == shift.assignedWorker){ %>        
+            <tr>
+                <td><%= shift.jobCode %></td>
+                <td><%= new Intl.DateTimeFormat('en-GB', { year: 'numeric', month: 'long', day: '2-digit'}).format(shift.date)  %></td>
+                <td><%= new Intl.DateTimeFormat('en-GB', { timeStyle: 'short'}).format(shift.startTime) %></td>
+                <td><%= new Intl.DateTimeFormat('en-GB', { timeStyle: 'short'}).format(shift.endTime) %></td>
+                <td><%= shift.assignedWorker %></td>
+            </tr>
+        <% } %>
+      <% }); %>
+    </tbody>
+  </table>
