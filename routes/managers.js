@@ -61,14 +61,14 @@ router.post('/add', isLoggedIn, (req, res, next) => {
 //getting a list of employees
 router.get('/list', isLoggedIn, (req, res, next) => {
     Employee.find({}).then((employees) => {
-        res.render('managers/list', { title: 'Employee List', employees: employees });
+        res.render('managers/list', { title: 'Employee List', employees: employees, user: req.user });
     });
 });
 
 //goes to the specified employee to edit
 router.get('/edit/:id', isLoggedIn, (req, res, next) => {
     Employee.findOne({ _id: req.params.id }).then((employee) => {
-        res.render('managers/edit', { title: 'Edit Employee', employee: employee });
+        res.render('managers/edit', { title: 'Edit Employee', employee: employee, user: req.user });
     }); 
 });
 
