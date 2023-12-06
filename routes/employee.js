@@ -15,7 +15,7 @@ function isLoggedIn(req, res, next){
 //// 
 
 router.get('/', isLoggedIn, (req, res, next) => {
-    res.render('employee/index', { title: 'Employee page' });
+    res.render('employee/index', { title: 'Employee page', user: req.user });
 });
 
 router.get('/shifts', isLoggedIn, (req, res, next) => {

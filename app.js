@@ -35,8 +35,9 @@ const mongoose = require('mongoose')
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var managersRouter = require('./routes/managers');
-var employeeRouter = require('./routes/employee')
+var employeeRouter = require('./routes/employee');
 var shiftRouter = require('./routes/shift');
+var adminRouter = require('./routes/admin');
 const Employee = require('./models/Employee');
 
 var app = express();
@@ -102,8 +103,9 @@ passport.deserializeUser(User.deserializeUser());
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/managers', managersRouter);
-app.use('/employee',employeeRouter)
-app.use('/shift',shiftRouter);
+app.use('/employee', employeeRouter);
+app.use('/shift', shiftRouter);
+app.use('/admin', adminRouter);
 
 
 app.post('/', function(req, res, next){
