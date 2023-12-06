@@ -2,3 +2,7 @@
 <h1><%= title %></h1>
 <p>Welcome to <%= title %></p>
 
+<p>Logged in as: <%= user.type%></p>
+<% if (user.type == 'manager') { %>
+    <p> ONLY MANAGERS SHOULD SEE THIS BLOCK </p>   
+<% } %>

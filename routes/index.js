@@ -20,7 +20,7 @@ router.get('/login', (req,res,next) =>{
   let messages = req.session.messages || []
   req.session.messages = []
   //pass to view
-  res.render('login', {title: 'Login', messages: messages} );
+  res.render('login', {title: 'Login', messages: messages, user: req.user} );
 });
 
 //Posts the login form and authenticates the user using passport

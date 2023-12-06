@@ -1,29 +1,68 @@
 <%- include('../header'); -%>
-<h1>Welcome to <%= title %></h1>
+  <h1>Welcome to <%= title %>, <%= user.username %>, <%= user.type %>
+  </h1>
 
-<table class="table table-striped table-hover">
-  <thead>
-    <th>Job Code</th>
-    <th>Date</th>
-    <th>Start Time</th>
-    <th>End Time</th>
-    <th>Assigned Worker</th>
-    <th></th>
-  </thead>
-  <tbody>
-    <% shifts.forEach(function(shift) { %>
-    <tr>
-      <td><%= shift.jobCode %></td>
-      <td><%= new Intl.DateTimeFormat('en-GB', { year: 'numeric', month: 'long', day: '2-digit'}).format(shift.date)  %></td>
-      <td><%= new Intl.DateTimeFormat('en-GB', { timeStyle: 'short'}).format(shift.startTime) %></td>
-      <td><%= new Intl.DateTimeFormat('en-GB', { timeStyle: 'short'}).format(shift.endTime) %></td>
-      <td><%= shift.assignedWorker %></td>
-      <td>
-        <a href="/shift/edit/<%= shift._id %>" class="btn btn-primary">Edit</a>
-        <a href="/shift/delete/<%= shift._id %>" class="btn btn-danger">Delete</a
-        >
-      </td>
-    </tr>
-    <% }); %>
-  </tbody>
-</table>
+  <table class="table table-striped table-hover">
+    <thead>
+      <th>Job Code</th>
+      <th>Date</th>
+      <th>Start Time</th>
+      <th>End Time</th>
+      <th>Assigned Worker</th>
+      <th></th>
+    </thead>
+    <tbody>
+      <!-- populated by employee username -->
+      <% shifts.forEach(function(shift) { %>
+        <% if (shift.assignedWorker==user.username)  { %>
+          <tr>
+            <td>
+              <%= shift.jobCode %>
+            </td>
+            <td>
+              <%= new Intl.DateTimeFormat('en-GB', { year: 'numeric' , month: 'long' , day: '2-digit'
+                }).format(shift.date) %>
+            </td>
+            <td>
+              <%= new Intl.DateTimeFormat('en-GB', { timeStyle: 'short' }).format(shift.startTime) %>
+            </td>
+            <td>
+              <%= new Intl.DateTimeFormat('en-GB', { timeStyle: 'short' }).format(shift.endTime) %>
+            </td>
+            <td>
+              <%= shift.assignedWorker %>
+            </td>
+          </tr>
+          <% }%>
+          <% }); %>   
+           <!-- manager populated  -->
+          <% shifts.forEach(function(shift) { %>
+            <% if (user.type == 'Manager') { %>
+              <tr>
+                <td>
+                  <%= shift.jobCode %>
+                </td>
+                <td>
+                  <%= new Intl.DateTimeFormat('en-GB', { year: 'numeric' , month: 'long' , day: '2-digit'
+                    }).format(shift.date) %>
+                </td>
+                <td>
+                  <%= new Intl.DateTimeFormat('en-GB', { timeStyle: 'short' }).format(shift.startTime) %>
+                </td>
+                <td>
+                  <%= new Intl.DateTimeFormat('en-GB', { timeStyle: 'short' }).format(shift.endTime) %>
+                </td>
+                <td>
+                  <%= shift.assignedWorker %>
+                </td>
+                <td>
+                  <% if (user.type == 'Manager') { %>
+                  <a href="/shift/edit/<%= shift._id %>" class="btn btn-primary">Edit</a>
+                  <a href="/shift/delete/<%= shift._id %>" class="btn btn-danger">Delete</a>
+                  <% } %>
+                </td>
+              </tr>
+              <% }%>
+              <% }); %>                
+    </tbody>
+  </table>
