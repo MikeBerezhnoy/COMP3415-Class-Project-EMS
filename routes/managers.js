@@ -27,12 +27,12 @@ router.get('/', isLoggedIn, isLoggedInManager, (req, res, next) => {
 });
 
 //going to form page to add a employee
-router.get('/add', isLoggedIn, (req, res, next) => {
-    res.render('managers/add', { title: 'Add Employee' });
+router.get('/add', isLoggedIn, isLoggedInManager, (req, res, next) => {
+    res.render('managers/add', { title: 'Add Employee', user: req.user });
 });
 
 //Adding the employee into the database and creating there account with hashed password
-router.post('/add', isLoggedIn, (req, res, next) => {
+router.post('/add', isLoggedIn, isLoggedInManager, (req, res, next) => {
     const userName = req.body.firstName 
     User.register( 
         new Employee({
@@ -59,21 +59,21 @@ router.post('/add', isLoggedIn, (req, res, next) => {
     })
 
 //getting a list of employees
-router.get('/list', isLoggedIn, (req, res, next) => {
+router.get('/list', isLoggedIn, isLoggedInManager, (req, res, next) => {
     Employee.find({}).then((employees) => {
         res.render('managers/list', { title: 'Employee List', employees: employees, user: req.user });
     });
 });
 
 //goes to the specified employee to edit
-router.get('/edit/:id', isLoggedIn, (req, res, next) => {
+router.get('/edit/:id', isLoggedIn, isLoggedInManager, (req, res, next) => {
     Employee.findOne({ _id: req.params.id }).then((employee) => {
         res.render('managers/edit', { title: 'Edit Employee', employee: employee, user: req.user });
     }); 
 });
 
 //updates the db with the edits to the specified employee
-router.post('/edit/:id', isLoggedIn, (req, res, next) => {
+router.post('/edit/:id', isLoggedIn, isLoggedInManager, (req, res, next) => {
     Employee.updateOne({ _id: req.params.id }, {
         firstName: req.body.firstName,
         lastName: req.body.lastName,
@@ -90,11 +90,11 @@ router.post('/edit/:id', isLoggedIn, (req, res, next) => {
 });
 
 //gets the specified employee and deletes them from the db
-router.get('/delete/:_id', isLoggedIn, (req,res,next)=>{
+router.get('/delete/:_id', isLoggedIn, isLoggedInManager, (req,res,next)=>{
     Employee.deleteOne({
         _id: req.params._id
     }).then(() => {
-        res.redirect('/manager/list');
+        res.redirect('/managers/list');
     })
 });
 
