@@ -1,0 +1,38 @@
+<%- include('../header'); -%>
+<h1><%= title %></h1>
+<p>Welcome to <%= title %></p>
+
+
+<table class="table table-striped table-hover">
+    <thead>
+        <th>ID#</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Username</th>
+        <th>Role</th>
+        <th>Address</th>
+        <th>Birthdate</th>
+        <th>Hire Date</th>
+        <th>Department</th>
+        <th></th>
+    </thead>
+    <tbody>
+        <% managers.forEach(function(manager) { %>
+        <tr>
+            <td><%= manager.id %></td>
+            <td><%= manager.firstName %></td>
+            <td><%= manager.lastName %></td>
+            <td><%= manager.username %></td>
+            <td><%= manager.role %></td>
+            <td><%= manager.address %></td>
+            <td><%= new Intl.DateTimeFormat('en-GB', { year: 'numeric', month: 'long', day: '2-digit'}).format(manager.birthDate) %></td>
+            <td><%= new Intl.DateTimeFormat('en-GB', { year: 'numeric', month: 'long', day: '2-digit'}).format(manager.hireDate) %></td>
+            <td><%= manager.department %></td>
+            <td>
+                <a href="/admin/edit/<%= manager._id %>" class="btn btn-primary">Edit</a>
+                <a href="/admin/delete/<%= manager._id %>" class="btn btn-danger">Delete</a>
+            </td>
+        </tr>
+        <% }); %>
+    </tbody>
+</table>
