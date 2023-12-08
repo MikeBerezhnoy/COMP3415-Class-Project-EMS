@@ -1,3 +1,4 @@
+const calendar = require('../config/calender-config');
 var express = require('express');
 var router = express.Router();
 
@@ -19,8 +20,11 @@ router.get('/', isLoggedIn, (req, res, next) => {
 });
 
 router.get('/shifts', isLoggedIn, (req, res, next) => {
+    const year = req.query.year || 2020;
+    const months = ["January", "February", "March", "April", "May", "June", "July",
+            "August", "September", "October", "November", "December"];
     Shift.find({}).then((shifts) => {
-        res.render('employee/shifts', { title: 'List of shifts', shifts: shifts, user: req.user });
+        res.render('employee/shifts', { title: 'List of shifts', shifts: shifts, user: req.user, calendar: calendar(year), months, year });
     });
 });
 

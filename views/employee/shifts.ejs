@@ -1,7 +1,31 @@
  <!-- Where the shifts for employee is displayed -->
  <%- include('../header'); -%>
-<h1><%= title %></h1>
-<p>Welcome to <%= title %></p>
+<h1 class="text-center"><%= year %> Shift List</h2>
+
+<div class="calendar-container">
+  <% for(let month = 0; month < calendar.length; month++) { %>
+
+  <div class="month-container" id="<%= months[month] %>">
+      <h3 style="text-align: center;"> <%= months[month] %> </h3>
+      <div class="day-of-week">
+          <span>Sun</span><span>Mon</span><span>Tue</span><span>
+              Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+      </div>
+      <% for(let x = 0;x < calendar[month].length;x++) { %>
+      <div class="days">
+          <% for(let y = 0;y < calendar[month][x].length;y++) { %>
+          <div class="date">
+              <div id="<%=calendar[month][x][y] %>">
+                  <%= calendar[month][x][y] %>
+              </div>
+          </div>
+          <% } %>
+      </div>
+      <% } %>
+  </div>
+
+  <% } %>
+</div>
 
 <table class="table table-striped table-hover">
     <thead>
