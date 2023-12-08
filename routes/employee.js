@@ -24,4 +24,10 @@ router.get('/shifts', isLoggedIn, (req, res, next) => {
     });
 });
 
+router.get('/punch', isLoggedIn, (req, res, next) =>{
+    Shift.find({}).then((shifts) => {
+        res.render('employee/punch', { title: 'Punch In or Out', shifts: shifts, user: req.user });
+    });
+})
+
 module.exports = router;
