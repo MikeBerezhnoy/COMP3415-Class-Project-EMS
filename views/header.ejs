@@ -15,9 +15,21 @@
   <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
     <div class="container-fluid">
       <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link active" href="/">Home</a>
-        </li>
+        <li class="nav-item"><a class="nav-link active" href="/">Home</a></li>
+        <% if (user) { %>
+          <% if (user.type == 'Employee') { %>
+            <li class="nav-item"><a class="nav-link active" href="/employee/shifts">Shifts</a></li>
+            <li class="nav-item"><a class="nav-link active" href="/employee/punch">Punch In/Out</a></li>
+          <% }else if(user.type == 'Manager') { %>
+            <li class="nav-item"><a class="nav-link active" href="/managers/list">View Employees</a></li>
+            <li class="nav-item"><a class="nav-link active" href="/managers/add">Add Employee</a></li>
+            <li class="nav-item"><a class="nav-link active" href="/shift/add">Create Shift</a></li>
+          <% }else if(user.type == 'Admin') { %>
+            <li class="nav-item"><a class="nav-link active" href="/admin/list">List Managers</a></li>
+            <li class="nav-item"><a class="nav-link active" href="/admin/createAdmin">Create Admin</a></li>
+            <li class="nav-item"><a class="nav-link active" href="/admin/add">Add Manager</a></li>
+          <% } %>
+        <% } %>
       </ul>
       <ul class="navbar-nav ml-auto">
         <% if (user) { %>

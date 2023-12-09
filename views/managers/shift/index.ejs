@@ -20,8 +20,7 @@
               <%= shift.jobCode %>
             </td>
             <td>
-              <%= new Intl.DateTimeFormat('en-GB', { year: 'numeric' , month: 'long' , day: '2-digit'
-                }).format(shift.date) %>
+              <%= new Intl.DateTimeFormat('en-GB', { year: 'numeric' , month: 'long' , day: '2-digit'}).format(shift.date) %>
             </td>
             <td>
               <%= new Intl.DateTimeFormat('en-GB', { timeStyle: 'short' }).format(shift.startTime) %>

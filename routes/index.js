@@ -3,9 +3,16 @@ var router = express.Router();
 
 const passport = require('passport')
 
+function isLoggedIn(req, res, next){
+  if(req.isAuthenticated()){
+      return next();
+  }
+  res.redirect('/login');
+}
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Employee Management', user: req.user });
+  res.render('index', { title: 'Employee Management', user: req.user});
 });
 
 /* POST home page. */
