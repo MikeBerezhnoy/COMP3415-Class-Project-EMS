@@ -1,9 +1,51 @@
 <%- include('../header'); -%>
 <h1><%= title %></h1>
 <p>Welcome to <%= title %></p>
-<button class="btn btn-info">
-    Punch In
-</button>
-<button class="btn btn-danger">
-    Punch Out
-</button>
+
+<p>Your next shift is:</p>
+<% shifts.forEach(function(shift) { %>        
+    <% if (user.username == shift.assignedWorker){ %>        
+        <p><%= new Intl.DateTimeFormat('en-GB', { year: 'numeric', month: 'long', day: '2-digit'}).format(shift.date)  %> from <%= new Intl.DateTimeFormat('en-GB', { timeStyle: 'short'}).format(shift.startTime) %> to <%= new Intl.DateTimeFormat('en-GB', { timeStyle: 'short'}).format(shift.endTime) %></p>
+    <% }}) %>
+
+    <!-- get the current time -->
+    <% var today = new Date(); %>
+    <% var time = today.getHours() + ":" + today.getMinutes() %>
+    <% var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate(); %>
+    <% var dateTime = time+' '+date; %>
+    <% var dateTime = new Date(dateTime); %>
+
+    <p>Current time is: <%= time %></p>
+
+    <!-- if it is within 15 minutes of an employee start time, show the punch in button -->
+    <% shifts.forEach(function(shift) { %>
+        <% var shiftDate = new Date(shift.date); %>
+        <% var shiftstartTime = new Date(shift.startTime) %>
+        <% var shiftendTime = new Date(shift.endTime) %>
+        <!-- save the value of 15 minutes after the shift start time -->
+        <% var shiftplus15 = new Date(shift.startTime) %>
+        <% shiftplus15.setMinutes(shift.startTime.getMinutes() + 15) %>
+        <!-- same but for end of shift time -->
+        <% var shiftendplus15 = new Date(shift.endTime) %>
+        <% shiftendplus15.setMinutes(shift.endTime.getMinutes() + 15) %>
+        
+
+        <% if (user.username == shift.assignedWorker){ %>     
+            <p><%= shift.punchInTime %> is the shift punch in time</p>   
+            <p><%= shift.punchOutTime %> is the shift punch out time</p> 
+            <% if (shiftstartTime <= dateTime && dateTime <= shiftplus15 && shift.punchInTime == null)  { %>
+                <a class="btn btn-info" href="/employee/punch/validateIn/<%= shift._id %>">
+                    Punch In
+                </a>
+            <% } %>
+        <% } %>
+
+                <!-- employees can punch out up to 15 minutes after their shift -->
+            <% if (user.username == shift.assignedWorker && shift.punchOutTime == null){ %>      
+                 
+                <% if (dateTime <= shiftendplus15 && shift.punchInTime != null){ %>
+                    <a class="btn btn-danger" href="/employee/punch/validateOut/<%= shift._id %>">
+                        Punch Out
+                    </a>
+                <% } %>
+            <% }}) %>

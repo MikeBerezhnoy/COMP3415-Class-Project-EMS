@@ -37,8 +37,8 @@ router.get('/add', isLoggedIn, (req, res, next) => {
 router.post('/add', isLoggedIn, (req, res, next) => {
     Shift.create({
         jobCode: req.body.jobCode,
-        date: req.body.date,
-        startTime: req.body.date+"T"+req.body.startTime,
+        date: req.body.date+ " " + "5:00:00",
+        startTime:req.body.date + " " + req.body.startTime,
         assignedWorker: req.body.assignedWorker,
         endTime: req.body.date+"T"+req.body.endTime
     })
@@ -56,7 +56,7 @@ router.get('/edit/:id', isLoggedIn, (req, res, next) => {
 router.post('/edit/:id', isLoggedIn, (req, res, next) => {
     Shift.updateOne({ _id: req.params.id }, {
         jobCode: req.body.jobCode,
-        date: req.body.date,
+        date: req.body.date+ " " + "5:00:00",
         startTime: req.body.date+"T"+req.body.startTime,
         endTime: req.body.date+"T"+req.body.endTime
     }).then(() => {

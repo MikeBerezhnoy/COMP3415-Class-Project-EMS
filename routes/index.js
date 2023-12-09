@@ -25,7 +25,7 @@ router.get('/login', (req,res,next) =>{
 
 //Posts the login form and authenticates the user using passport
 router.post('/login', passport.authenticate('local', {
-    successRedirect: '/',
+    successRedirect: '/employee',
     failureRedirect: '/login',
     failureMessage: 'Invalid Credentials'
 }));

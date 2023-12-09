@@ -30,4 +30,23 @@ router.get('/punch', isLoggedIn, (req, res, next) =>{
     });
 })
 
+router.get('/punch/validateIn/:id', isLoggedIn, (req, res, next) =>{
+    Shift.updateOne({_id: req.params.id},{
+        punchInTime: Date.now()})
+    .then(() => {
+        res.render('employee/punch/validateIn', { title: 'Punch In', user: req.user });
+    });
+})
+
+
+router.get('/punch/validateOut/:id', isLoggedIn, (req, res, next) =>{
+    Shift.updateOne({_id: req.params.id},{
+        punchOutTime: Date.now()})
+    .then(() => {
+        res.render('employee/punch/validateOut', { title: 'Punch Out', user: req.user });
+    });
+})
+
+
+
 module.exports = router;

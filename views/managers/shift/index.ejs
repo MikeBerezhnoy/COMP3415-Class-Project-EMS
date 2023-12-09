@@ -1,4 +1,4 @@
-<%- include('../header'); -%>
+<%- include('../../header'); -%>
   <h1>Welcome to <%= title %>, <%= user.username %>, <%= user.type %>
   </h1>
 
@@ -37,7 +37,8 @@
           <% }); %>   
            <!-- manager populated  -->
           <% shifts.forEach(function(shift) { %>
-            <% if (user.type == 'Manager') { %>
+            <!-- If user is manager or admin type -->
+            <% if (user.type == 'Admin')  { %>
               <tr>
                 <td>
                   <%= shift.jobCode %>
@@ -56,7 +57,7 @@
                   <%= shift.assignedWorker %>
                 </td>
                 <td>
-                  <% if (user.type == 'Manager') { %>
+                  <% if (user.type == 'Admin') { %>
                   <a href="/shift/edit/<%= shift._id %>" class="btn btn-primary">Edit</a>
                   <a href="/shift/delete/<%= shift._id %>" class="btn btn-danger">Delete</a>
                   <% } %>
