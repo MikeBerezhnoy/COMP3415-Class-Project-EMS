@@ -1,5 +1,5 @@
  <!-- Where the shifts for employee is displayed -->
- <%- include('.../header'); -%>
+ <%- include('../header'); -%>
 <h1><%= title %></h1>
 <p>Welcome to <%= title %></p>
 
@@ -10,6 +10,8 @@
       <th>Start Time</th>
       <th>End Time</th>
       <th>Assigned Worker</th>
+      <th>Punch in Time</th>
+      <th>Punch out Time</th>
     </thead>
     <tbody>
       <% shifts.forEach(function(shift) { %>
@@ -20,6 +22,8 @@
                 <td><%= new Intl.DateTimeFormat('en-GB', { timeStyle: 'short'}).format(shift.startTime) %></td>
                 <td><%= new Intl.DateTimeFormat('en-GB', { timeStyle: 'short'}).format(shift.endTime) %></td>
                 <td><%= shift.assignedWorker %></td>
+                <td><%= new Intl.DateTimeFormat('en-GB', { timeStyle: 'short'}).format(shift.punchInTime) %></td>
+                <td><%= new Intl.DateTimeFormat('en-GB', { timeStyle: 'short'}).format(shift.punchOutTime) %></td>
             </tr>
         <% } %>
       <% }); %>

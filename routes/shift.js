@@ -41,8 +41,9 @@ router.post('/add', isLoggedIn, (req, res, next) => {
         startTime:req.body.date + " " + req.body.startTime,
         assignedWorker: req.body.assignedWorker,
         endTime: req.body.date+"T"+req.body.endTime
-    })
-res.redirect('/shift', {user: req.user});
+    }).then(() => {
+        res.redirect('/shift');
+    });
 });
 
 //goes to the specified shift to edit

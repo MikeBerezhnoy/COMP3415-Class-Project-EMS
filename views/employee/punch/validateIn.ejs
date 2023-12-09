@@ -1,4 +1,10 @@
 <!-- The main view from employee's so they can punch in and out -->
 <%- include('../../header'); -%>
 <h1><%= title %></h1>
-<p>Validating your punch...</p>
+<% var today = new Date(); %>
+<% var time = today.getHours() + ":" + today.getMinutes() %>
+<p>Punched in at <%= time %></p>
+
+<a class="btn btn-info" href="/">
+    Go back to home.
+</a>
