@@ -39,10 +39,10 @@ router.post('/add', isLoggedIn, isLoggedInManager, (req, res, next) => {
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         username: req.body.firstName + "" + req.body.lastName,
-        birthDate: req.body.birthDate,
+        birthDate: req.body.birthDate + " " + "5:00:00",
         role: req.body.role,
         address: req.body.address,
-        hireDate: req.body.hireDate,
+        hireDate: req.body.hireDate + " " + "5:00:00",
         hourlyRate: req.body.hourlyRate
         }),
         req.body.password,
@@ -79,10 +79,10 @@ router.post('/edit/:id', isLoggedIn, isLoggedInManager, (req, res, next) => {
         lastName: req.body.lastName,
         username: req.body.firstName + "" + req.body.lastName,
         password: req.body.birthDate,
-        birthDate: req.body.birthDate,
+        birthDate: req.body.birthDate + " " + "5:00:00",
         role: req.body.role,
         address: req.body.address,
-        hireDate: req.body.hireDate,
+        hireDate: req.body.hireDate + " " + "5:00:00",
         hourlyRate: req.body.hourlyRate
     }).then(() => {
         res.redirect('/managers/list');
