@@ -1,4 +1,17 @@
 <!-- The main view from employee's so they can punch in and out -->
 <%- include('../header'); -%>
-<h1><%= title %></h1>
-<p>Welcome to <%= title %></p>
+<h1><%= user.username %> <%= title %></h1>
+<div class="card mx-2" style="width: 18rem;">
+    <ul class="list-group list-group-flush">
+        <% if(user) { %>
+            <li class="list-group-item">First Name: <%= user.firstName %></li>
+            <li class="list-group-item">Last Name: <%= user.lastName %></li>
+            <li class="list-group-item">Username: <%= user.username %></li>
+            <li class="list-group-item">Role: <%= user.role %></li>
+            <li class="list-group-item">Address: <%= user.address %></li>
+            <li class="list-group-item">Birthday: <%= new Intl.DateTimeFormat('en-GB', { year: 'numeric', month: 'long', day: '2-digit'}).format(user.birthDate) %></li>
+            <li class="list-group-item">Hire Date: <%= new Intl.DateTimeFormat('en-GB', { year: 'numeric', month: 'long', day: '2-digit'}).format(user.hireDate) %></li>
+            <li class="list-group-item">Hourly Rate: <%= user.hourlyRate %></li>
+        <% } %>
+    </ul>
+    </div>

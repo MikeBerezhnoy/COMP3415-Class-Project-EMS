@@ -2,11 +2,14 @@
 <h1><%= title %></h1>
 <p>Welcome to <%= title %></p>
 
-<p>Your next shift is:</p>
-<% shifts.forEach(function(shift) { %>        
-    <% if (user.username == shift.assignedWorker && shift.punchOutTime == null){ %>        
-        <p><%= new Intl.DateTimeFormat('en-GB', { year: 'numeric', month: 'long', day: '2-digit'}).format(shift.date)  %> from <%= new Intl.DateTimeFormat('en-GB', { timeStyle: 'short'}).format(shift.startTime) %> to <%= new Intl.DateTimeFormat('en-GB', { timeStyle: 'short'}).format(shift.endTime) %></p>
-    <% }}) %>
+<div class="d-flex">
+    <p>Your next shift is: </p>
+    <% shifts.forEach(function(shift) { %>        
+        <% if (user.username == shift.assignedWorker && shift.punchOutTime == null){ %>        
+            <p><%= new Intl.DateTimeFormat('en-GB', { year: 'numeric', month: 'long', day: '2-digit'}).format(shift.date)  %> from <%= new Intl.DateTimeFormat('en-GB', { timeStyle: 'short'}).format(shift.startTime) %> to <%= new Intl.DateTimeFormat('en-GB', { timeStyle: 'short'}).format(shift.endTime) %></p>
+        <% }}) %>
+</div>
+
 
     <!-- get the current time -->
     <% var today = new Date(); %>

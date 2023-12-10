@@ -2,18 +2,18 @@
 //localhost:3000
 
 // MAIN TO DO LIST:
-// 1   Finish employee/manager section (Edit, delete for employees) -- Employee Done need manager CRUD
+// X1   Finish employee/manager section (Edit, delete for employees) -- Done
 // X2   Finish shift section (Create, view, Edit, delete for shifts) -- CRUD is complete
 // X2.5 Need to be able to pull dropdown list of employees for shift creation -- Done
 // X2.6 Date needs to only display the date not the time -- Done
 // X2.7 start and end time only need to display time -- Done
 // 2.8 edit date, start and end time fields don't populate when taken to edit screen
 // X3   Finish the login section and functionality -- Login completed
-// 4   Remove register section (employees will never self register - they will only be
-//     added by managers)
-// 5   employee punch clock system
+// X4   Remove register section (employees will never self register - they will only be
+//     added by managers) -- Done
+// X5   employee punch clock system -- Done
 // 6   manager dashboard
-// 7   employee dashboard
+// X7   employee dashboard -- Done
 // 8   manager reports
 
 
