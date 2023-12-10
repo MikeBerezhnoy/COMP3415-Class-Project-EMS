@@ -3,6 +3,50 @@
 <h1><%= title %></h1>
 <p>Welcome to <%= title %></p>
 
+<div class="calendar-container">
+  <% for(let month = 0;month < calendar.length;month++) { %>
+
+  <div class="month-container" id="<%= months[month] %>">
+      <h3 style="text-align: center;"> <%= months[month] %> </h3>
+
+
+      <div class="day-of-week">
+          <span>Sun</span><span>Mon</span><span>Tue</span><span>
+              Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+      </div>
+      <% for(let x = 0;x < calendar[month].length;x++) { %>
+      <div class="p-3 days">
+          <% for(let y = 0;y < calendar[month][x].length;y++) { %>
+
+          <div class="date">
+              <div id="<%=calendar[month][x][y] %>">
+                  <%= calendar[month][x][y] %>
+                  <% shifts.forEach(function(shift) { %>
+                    <% if (user.username == shift.assignedWorker){ %>
+                      <% var shiftDate = new Date(shift.date); %> 
+                      <%if(shiftDate.getDate() == calendar[month][x][y] && shiftDate.getMonth() == month){%>
+                        <ul class="h6 small list-group list-group-flush">
+                          <li class="list-group-item">Job Code: <%= shift.jobCode %></li>
+                          <li class="list-group-item">Start Time: <%= new Intl.DateTimeFormat('en-GB', { timeStyle: 'short'}).format(shift.startTime) %></li>
+                          <li class="list-group-item">End Time: <%= new Intl.DateTimeFormat('en-GB', { timeStyle: 'short'}).format(shift.endTime) %></li>
+                          <% if(shift.punchOutTime != null) {%>
+                            <li class="list-group-item">Shift Done</li>
+                          <% } %>
+                        </ul>
+                      <% } %>        
+                    <% } %>
+                  <% }); %>
+              </div>
+          </div>
+
+          <% } %>
+      </div>
+      <% } %>
+  </div>
+
+  <% } %>
+</div>
+
 <table class="table table-striped table-hover">
     <thead>
       <th>Job Code</th>
@@ -15,10 +59,12 @@
     </thead>
     <tbody>
       <% shifts.forEach(function(shift) { %>
-        <% if (user.username == shift.assignedWorker){ %>        
+        <% if (user.username == shift.assignedWorker){ %>       
             <tr>
                 <td><%= shift.jobCode %></td>
-                <td><%= new Intl.DateTimeFormat('en-GB', { year: 'numeric', month: 'long', day: '2-digit'}).format(shift.date)  %></td>
+                <td>
+                  <%= new Intl.DateTimeFormat('en-GB', { year: 'numeric', month: 'long', day: '2-digit'}).format(shift.date)  %>
+                </td>
                 <td><%= new Intl.DateTimeFormat('en-GB', { timeStyle: 'short'}).format(shift.startTime) %></td>
                 <td><%= new Intl.DateTimeFormat('en-GB', { timeStyle: 'short'}).format(shift.endTime) %></td>
                 <td><%= shift.assignedWorker %></td>

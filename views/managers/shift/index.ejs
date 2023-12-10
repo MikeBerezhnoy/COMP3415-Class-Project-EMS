@@ -12,57 +12,23 @@
       <th></th>
     </thead>
     <tbody>
-      <!-- populated by employee username -->
       <% shifts.forEach(function(shift) { %>
-        <% if (shift.assignedWorker==user.username)  { %>
-          <tr>
-            <td>
-              <%= shift.jobCode %>
-            </td>
-            <td>
-              <%= new Intl.DateTimeFormat('en-GB', { year: 'numeric' , month: 'long' , day: '2-digit'}).format(shift.date) %>
-            </td>
-            <td>
-              <%= new Intl.DateTimeFormat('en-GB', { timeStyle: 'short' }).format(shift.startTime) %>
-            </td>
-            <td>
-              <%= new Intl.DateTimeFormat('en-GB', { timeStyle: 'short' }).format(shift.endTime) %>
-            </td>
-            <td>
-              <%= shift.assignedWorker %>
-            </td>
-          </tr>
-          <% }%>
-          <% }); %>   
-           <!-- manager populated  -->
-          <% shifts.forEach(function(shift) { %>
-            <!-- If user is manager or admin type -->
-            <% if (user.type == 'Admin')  { %>
-              <tr>
+        <% //if (user.username == shift.assignedWorker){ %>       
+            <tr>
+                <td><%= shift.jobCode %></td>
+                <td><%= new Intl.DateTimeFormat('en-GB', { year: 'numeric', month: 'long', day: '2-digit'}).format(shift.date)  %></td>
+                <td><%= new Intl.DateTimeFormat('en-GB', { timeStyle: 'short'}).format(shift.startTime) %></td>
+                <td><%= new Intl.DateTimeFormat('en-GB', { timeStyle: 'short'}).format(shift.endTime) %></td>
+                <td><%= shift.assignedWorker %></td>
+                <td><%= new Intl.DateTimeFormat('en-GB', { timeStyle: 'short'}).format(shift.punchInTime) %></td>
+                <td><%= new Intl.DateTimeFormat('en-GB', { timeStyle: 'short'}).format(shift.punchOutTime) %></td>
                 <td>
-                  <%= shift.jobCode %>
-                </td>
-                <td>
-                  <%= new Intl.DateTimeFormat('en-GB', { year: 'numeric' , month: 'long' , day: '2-digit'
-                    }).format(shift.date) %>
-                </td>
-                <td>
-                  <%= new Intl.DateTimeFormat('en-GB', { timeStyle: 'short' }).format(shift.startTime) %>
-                </td>
-                <td>
-                  <%= new Intl.DateTimeFormat('en-GB', { timeStyle: 'short' }).format(shift.endTime) %>
-                </td>
-                <td>
-                  <%= shift.assignedWorker %>
-                </td>
-                <td>
-                  <% if (user.type == 'Admin') { %>
                   <a href="/shift/edit/<%= shift._id %>" class="btn btn-primary">Edit</a>
                   <a href="/shift/delete/<%= shift._id %>" class="btn btn-danger">Delete</a>
-                  <% } %>
-                </td>
-              </tr>
-              <% }%>
-              <% }); %>                
+                </td> 
+            </tr>
+        <% //} %>
+      <% }); %> 
+             
     </tbody>
   </table>
