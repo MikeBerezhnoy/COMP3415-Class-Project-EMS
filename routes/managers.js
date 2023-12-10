@@ -4,6 +4,7 @@ var router = express.Router();
 //import user model
 const User = require('../models/User')
 const Employee = require('../models/Employee');
+const Shift = require('../models/Shift');
 
 //// This block needs to be in every route file that needs to check if the user is logged in
 //middleware to check if user is logged in
@@ -15,14 +16,14 @@ function isLoggedIn(req, res, next){
 }
 
 function isLoggedInManager(req, res, next){
-    if(req.user.type = 'manager'){
+    if(req.user.type = 'Manager' || req.user.type == 'Admin'){
         return next();
     }
     res.redirect('/login');
 }
 ////
 
-router.get('/', isLoggedIn, isLoggedInManager, (req, res, next) => {
+router.get('/', isLoggedInManager, (req, res, next) => {
     res.render('managers/index', { title: 'Managers page', user: req.user });
 });
 
@@ -96,6 +97,22 @@ router.get('/delete/:_id', isLoggedIn, isLoggedInManager, (req,res,next)=>{
     }).then(() => {
         res.redirect('/managers/list');
     })
+});
+
+router.get('/reports', isLoggedIn, isLoggedInManager, (req, res, next) => {
+    Employee.find({}).then((employees) => {
+        Shift.find({}).then((shifts) => {
+            res.render('managers/reports', { title: 'Reports', employees: employees, shifts: shifts, user: req.user });
+        });
+    });
+});
+
+router.post('/reports', isLoggedIn, isLoggedInManager, (req, res, next) => {
+    Employee.findOne({ username: req.body.selectedEmployee}).then((employee) => {
+        Shift.find({}).then((shifts) => {
+            res.render('managers/generatedReport', { title: 'Reports', employee: employee, shifts: shifts, user: req.user });
+        });
+    });
 });
 
 module.exports = router;
