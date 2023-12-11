@@ -5,6 +5,7 @@ var router = express.Router();
 const User = require('../models/User')
 const Employee = require('../models/Employee');
 const Shift = require('../models/Shift');
+const Report = require('../models/Report');
 
 //// This block needs to be in every route file that needs to check if the user is logged in
 //middleware to check if user is logged in
@@ -109,6 +110,12 @@ router.get('/reports', isLoggedIn, isLoggedInManager, (req, res, next) => {
 
 router.post('/reports', isLoggedIn, isLoggedInManager, (req, res, next) => {
     Employee.findOne({ username: req.body.selectedEmployee}).then((employee) => {
+        Report.create({
+            reportDate: Date.now(),
+            employee: employee,
+            type: "General Employee Report",
+            autoGen: false,
+        });
         Shift.find({}).then((shifts) => {
             res.render('managers/generatedReport', { title: 'Reports', employee: employee, shifts: shifts, user: req.user });
         });
