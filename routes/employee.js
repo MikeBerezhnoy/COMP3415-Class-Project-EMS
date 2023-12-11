@@ -17,7 +17,6 @@ function isLoggedIn(req, res, next){
 //// 
 
 router.get('/', isLoggedIn, (req, res, next) => {
-    // Employee.findOne().then((employee))
     res.render('employee/index', { title: 'Employee Information', user: req.user });
 });
 
