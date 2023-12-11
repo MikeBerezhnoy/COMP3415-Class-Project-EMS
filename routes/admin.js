@@ -36,7 +36,7 @@ router.get('/createAdmin', isLoggedIn, isLoggedInAdmin, (req, res, next) => {
     res.render('admin/createAdmin', { title: 'Create Admin', user: req.user });
 });
 
-//Adding the manager into the database and creating there account with hashed password
+//Adding the admin into the database and creating their account with hashed password
 router.post('/createAdmin', isLoggedIn, isLoggedInAdmin, (req, res, next) => {
     const userName = req.body.firstName 
     User.register( 
@@ -68,6 +68,7 @@ router.get('/add', isLoggedIn, isLoggedInAdmin, (req, res, next) => {
     res.render('admin/add', { title: 'Add Manager', user: req.user });
 });
 
+// adding the manager into the database and creating their account with hashed password
 router.post('/add', isLoggedIn, isLoggedInAdmin, (req, res, next) => {
     const userName = req.body.firstName 
     User.register( 
