@@ -16,10 +16,10 @@ function isLoggedIn(req, res, next){
 }
 
 function isLoggedInAdmin(req, res, next){
-    if(req.user.type = 'admin'){
+    if(req.user.type == 'Admin'){
         return next();
     }
-    res.redirect('/login');
+    res.redirect('/');
 }
 
 router.get('/', isLoggedIn, isLoggedInAdmin, (req, res, next) => {

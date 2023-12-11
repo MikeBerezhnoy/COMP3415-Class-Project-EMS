@@ -24,10 +24,13 @@
             <li class="nav-item"><a class="nav-link active" href="/managers/list">View Employees</a></li>
             <li class="nav-item"><a class="nav-link active" href="/managers/add">Add Employee</a></li>
             <li class="nav-item"><a class="nav-link active" href="/shift/add">Create Shift</a></li>
+            <li class="nav-item"><a class="nav-link active" href="/shift">View all Shifts</a></li>
+            <li class="nav-item"><a class="nav-link active" href="/managers/reports">Reporting</a></li>
           <% }else if(user.type == 'Admin') { %>
             <li class="nav-item"><a class="nav-link active" href="/admin/list">List Managers</a></li>
             <li class="nav-item"><a class="nav-link active" href="/admin/createAdmin">Create Admin</a></li>
             <li class="nav-item"><a class="nav-link active" href="/admin/add">Add Manager</a></li>
+            <li class="nav-item"><a class="nav-link active" href="/managers/reports">Reporting</a></li>
           <% } %>
         <% } %>
       </ul>

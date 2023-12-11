@@ -16,14 +16,14 @@ function isLoggedIn(req, res, next){
 }
 
 function isLoggedInManager(req, res, next){
-    if(req.user.type = 'Manager' || req.user.type == 'Admin'){
+    if(req.user.type == 'Manager' || req.user.type == 'Admin'){
         return next();
     }
     res.redirect('/login');
 }
 ////
 
-router.get('/', isLoggedInManager, (req, res, next) => {
+router.get('/', isLoggedIn, isLoggedInManager, (req, res, next) => {
     res.render('managers/index', { title: 'Managers page', user: req.user });
 });
 

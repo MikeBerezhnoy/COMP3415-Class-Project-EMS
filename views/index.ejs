@@ -3,9 +3,15 @@
     <div>
         <h1><%= title %></h1>
         <p>Welcome to the worlds best Employee Management System</p>
+
+
         <div class="text-center">
+            <% if (user) { %>
+                <p>Logged in as: <%= user.type%></p>
+                <% } else { %>
             <a class="btn btn-primary" href="/login">Login</a>
         </div>
+        <% } %>
     </div>
 </div>
 

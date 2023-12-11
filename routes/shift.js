@@ -15,26 +15,26 @@ function isLoggedIn(req, res, next){
 }
 
 function isLoggedInManager(req, res, next){
-    if(req.user.type = 'manager'){
+    if(req.user.type == 'Manager' || req.user.type == 'Admin'){
         return next();
     }
-    res.redirect('/login');
+    res.redirect('/');
 }
 ////
 
-router.get('/', isLoggedIn, (req, res, next) => {
+router.get('/', isLoggedIn, isLoggedInManager, (req, res, next) => {
     Shift.find({}).then((shifts) => {
-        res.render('managers/shift/index', { title: 'List of shifts', shifts: shifts, user: req.user });
+        res.render('managers/shift/index', { title: 'List of all shifts', shifts: shifts, user: req.user });
     });
 });
 
-router.get('/add', isLoggedIn, (req, res, next) => {
+router.get('/add', isLoggedIn, isLoggedInManager, (req, res, next) => {
     Employee.find({}).then((employees) => {
         res.render('managers/shift/add', { title: 'Create Shift', employees: employees, user: req.user });});
 });
 
 //adds creates and shift object and adds it to the database
-router.post('/add', isLoggedIn, (req, res, next) => {
+router.post('/add', isLoggedIn, isLoggedInManager, (req, res, next) => {
     Shift.create({
         jobCode: req.body.jobCode,
         date: req.body.date+ " " + "5:00:00",
@@ -47,14 +47,14 @@ router.post('/add', isLoggedIn, (req, res, next) => {
 });
 
 //goes to the specified shift to edit
-router.get('/edit/:id', isLoggedIn, (req, res, next) => {
+router.get('/edit/:id', isLoggedIn, isLoggedInManager, (req, res, next) => {
     Shift.findOne({ _id: req.params.id }).then((shift) => {
         res.render('managers/shift/edit', { title: 'Edit shift', shift: shift, user: req.user });
     }); 
 });
 
 //updates the specified shift 
-router.post('/edit/:id', isLoggedIn, (req, res, next) => {
+router.post('/edit/:id', isLoggedIn, isLoggedInManager, (req, res, next) => {
     Shift.updateOne({ _id: req.params.id }, {
         jobCode: req.body.jobCode,
         date: req.body.date+ " " + "5:00:00",
@@ -66,7 +66,7 @@ router.post('/edit/:id', isLoggedIn, (req, res, next) => {
 });
 
 //deletes the specified shift
-router.get('/delete/:_id', isLoggedIn, (req,res,next)=>{
+router.get('/delete/:_id', isLoggedIn, isLoggedInManager, (req,res,next)=>{
     Shift.deleteOne({
         _id: req.params._id
     }).then(() => {
